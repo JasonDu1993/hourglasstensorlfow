@@ -3,4 +3,5 @@
 *.egg
 *.egg-info
 hourglass_saver
+.idea
 hg_test*.*
