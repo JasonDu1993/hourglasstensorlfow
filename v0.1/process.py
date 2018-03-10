@@ -14,8 +14,8 @@ Created on Sun May 28 03:28:07 2017
 import csv
 import os
 import numpy as np
-import params
-import tools
+from . import params
+from . import tools
 
 
 

@@ -1,0 +1,6 @@
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+hourglass_saver
+hg_test*.*

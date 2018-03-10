@@ -8,7 +8,7 @@ Created on Sun May 28 03:32:16 2017
 
 import tensorflow as tf
 import numpy as np
-from layers import conv2d, convBnrelu, residual
+from .layers import conv2d, convBnrelu, residual
 
 ################################################
 #	             Hourglass Model

@@ -9,12 +9,12 @@ Created on Sun May 28 05:08:22 2017
 import tensorflow as tf
 import numpy as np
 import os
-from hourglassModel import HourglassModel
+from .hourglassModel import HourglassModel
 from time import time, strftime
 from random import shuffle, choice
-import params
-import process
-from tools import fullTestSet, modifyOutput, rotatehm
+from . import params
+from . import process
+from .tools import fullTestSet, modifyOutput, rotatehm
 import sys
 from skimage.transform import rotate
 
