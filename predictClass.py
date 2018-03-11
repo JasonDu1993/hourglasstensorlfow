@@ -458,7 +458,7 @@ class PredictProcessor():
     def computeErr(self, history, frame=3):
         """ Given frames, compute error vector to project into new basis
         Args:
-            history	: List of Joints detected in previous frames
+            history	    : List of Joints detected in previous frames
             frame		: Number of previous frames to consider
         Returns:
             err			: Error vector
@@ -489,7 +489,7 @@ class PredictProcessor():
         # Don't change Matrix computed with those joints to normalize
         lhip = 3
         rsho = 9
-        # Epsilon to avoir ZeroDivision Exception
+        # Epsilon to avoid ZeroDivision Exception
         eps = 0.00000001
         # Compute X and Y coordinates
         x = err[:, 0:13]
@@ -687,7 +687,7 @@ class PredictProcessor():
         """ Multiple Person Estimation (WebCam usage)
         Args:
             j_thresh		: Joint Threshold
-            nms_thresh	: Non Maxima Suppression Threshold
+            nms_thresh	    : Non Maxima Suppression Threshold
             plt_l			: (bool) Plot Limbs
             plt_j			: (bool) Plot Joints
             plt_b			: (bool) Plot Bounding Boxes
@@ -1026,7 +1026,7 @@ class PredictProcessor():
         """ Compute PCK accuracy for a sample
         Args:
             weight		: Index of the joint considered
-            gtJFull	: Ground Truth (sampled on whole image)
+            gtJFull	    : Ground Truth (sampled on whole image)
             gtJ			: Ground Truth (sampled on reduced image)
             prJ			: Prediction
             boxL		: Box Lenght
@@ -1042,7 +1042,7 @@ class PredictProcessor():
     def compute_pck(self, datagen, idlh=3, idrs=12, testSet=None):
         """ Compute PCK on dataset
         Args:
-            datagen	: (DataGenerator)
+            datagen	    : (DataGenerator)
             idlh		: Index of Normalizer (Left Hip on PCK, neck on PCKh)
             idrs		: Index of Normalizer (Right Shoulder on PCK, top head on PCKh)
         """
@@ -1326,12 +1326,16 @@ class PredictProcessor():
 
 if __name__ == '__main__':
     t = time()
-    params = process_config('configTiny.cfg')
+    params = process_config('config.cfg')
+    print(params)
     predict = PredictProcessor(params)
+    print(predict)
     predict.color_palette()
     predict.LINKS_JOINTS()
     predict.model_init()
-    predict.load_model(load='hg_refined_tiny_200')
+    print("load model ...")
+    predict.load_model(load='hg_refined_200')
+    print("load model end")
     predict.yolo_init()
     predict.restore_yolo(load='YOLO_small.ckpt')
     predict._create_prediction_tensor()
