@@ -12,19 +12,19 @@ Created on Mon Jul 17 15:50:43 2017
 @github : https://github.com/wbenbihi/hourglasstensorlfow/
 
 Abstract:
-	This python code creates a Stacked Hourglass Model
-	(Credits : A.Newell et al.)
-	(Paper : https://arxiv.org/abs/1603.06937)
-	
-	Code translated from 'anewell' github
-	Torch7(LUA) --> TensorFlow(PYTHON)
-	(Code : https://github.com/anewell/pose-hg-train)
-	
-	Modification are made and explained in the report
-	Goal : Achieve Real Time detection (Webcam)
-	----- Modifications made to obtain faster results (trade off speed/accuracy)
-	
-	This work is free of use, please cite the author if you use it!
+    This python code creates a Stacked Hourglass Model
+    (Credits : A.Newell et al.)
+    (Paper : https://arxiv.org/abs/1603.06937)
+
+    Code translated from 'anewell' github
+    Torch7(LUA) --> TensorFlow(PYTHON)
+    (Code : https://github.com/anewell/pose-hg-train)
+
+    Modification are made and explained in the report
+    Goal : Achieve Real Time detection (Webcam)
+    ----- Modifications made to obtain faster results (trade off speed/accuracy)
+
+    This work is free of use, please cite the author if you use it!
 
 """
 
@@ -71,7 +71,7 @@ class PredictProcessor():
                                  decay=self.params['learning_rate_decay'], decay_step=self.params['decay_step'],
                                  dataset=None, training=False,
                                  w_summary=True, logdir_test=self.params['log_dir_test'],
-                                 logdir_train=self.params['log_dir_test'], tiny=self.params['tiny'],
+                                 logdir_train=self.params['log_dir_train'], tiny=self.params['tiny'],
                                  modif=False, name=self.params['name'], attention=self.params['mcam'],
                                  w_loss=self.params['weighted_loss'], joints=self.params['joint_list'])
         self.graph = tf.Graph()
@@ -997,8 +997,8 @@ class PredictProcessor():
                 cv2.destroyAllWindows()
                 cam.release()
                 print(time() - startT)
-            # if outName != None:
-            # outVid.release()
+                # if outName != None:
+                # outVid.release()
         cv2.destroyAllWindows()
         cam.release()
         if outName != None:
