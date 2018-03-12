@@ -26,6 +26,9 @@ Abstract:
 
     This work is free of use, please cite the author if you use it!
 """
+import os
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import time
 import tensorflow as tf
 import numpy as np
@@ -221,16 +224,20 @@ l           logdir_train       : Directory to Train Log file
             load	: Model to load (None if training from scratch) (see README for further information)
         """
         with tf.name_scope('Session'):
-            with tf.device(self.gpu):
-                self._init_session()
-                self._define_saver_summary(summary=False)
-                if load is not None:
-                    print('Loading Trained Model')
-                    t = time.time()
-                    self.saver.restore(self.Session, load)
-                    print('Model Loaded (', time.time() - t, ' sec.)')
-                else:
-                    print('Please give a Model in args (see README for further information)')
+            # with tf.device(self.gpu):
+            self._init_session()
+            self._define_saver_summary(summary=False)
+            if load is not None:
+                print('Loading Trained Model')
+                t = time.time()
+                try:
+                    # self.saver.restore(self.Session, load)
+                    self.saver.restore(self.Session, "./checkpoint")
+                except Exception:
+                    print('Loading Failed! (Check README file for further information)')
+                print('Model Loaded (', time.time() - t, ' sec.)')
+            else:
+                print('Please give a Model in args (see README for further information)')
 
     def _train(self, nEpochs=10, epochSize=1000, saveStep=500, validIter=10):
         """
@@ -354,9 +361,9 @@ l           logdir_train       : Directory to Train Log file
                 if load is not None:
                     self.saver.restore(self.Session, load)
                 # try:
-                #	self.saver.restore(self.Session, load)
+                #     self.saver.restore(self.Session, load)
                 # except Exception:
-                #	print('Loading Failed! (Check README file for further information)')
+                #     print('Loading Failed! (Check README file for further information)')
                 self._train(nEpochs, epochSize, saveStep, validIter=10)
 
     def weighted_bce_loss(self):

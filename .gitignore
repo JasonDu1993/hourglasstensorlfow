@@ -4,7 +4,7 @@
 *.egg-info
 hourglass_saver
 .idea
-hg_*.*
+hg_test_*.*
 YOLO_small.ckpt
 checkpoint
 *.npy

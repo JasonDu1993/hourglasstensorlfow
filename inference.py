@@ -51,14 +51,14 @@ class Inference():
     Easy to Use
     Images used for inference should be RGB images (int values in [0,255])
     Methods:
-        webcamSingle : Single Person Pose Estimation on Webcam Stream
-        webcamMultiple : Multiple Person Pose Estimation on Webcam Stream
-        webcamPCA : Single Person Pose Estimation with reconstruction error (PCA)
-        webcamYOLO : Object Detector
-        predictHM : Returns Heat Map for an input RGB Image
-        predictJoints : Returns joint's location (for a 256x256 image)
-        pltSkeleton : Plot skeleton on image
-        runVideoFilter : SURPRISE !!!
+        webcamSingle    : Single Person Pose Estimation on Webcam Stream
+        webcamMultiple  : Multiple Person Pose Estimation on Webcam Stream
+        webcamPCA       : Single Person Pose Estimation with reconstruction error (PCA)
+        webcamYOLO      : Object Detector
+        predictHM       : Returns Heat Map for an input RGB Image
+        predictJoints   : Returns joint's location (for a 256x256 image)
+        pltSkeleton     : Plot skeleton on image
+        runVideoFilter  : SURPRISE !!!
     """
 
     def __init__(self, config_file='config.cfg', model='hg_refined_tiny_200', yoloModel='YOLO_small.ckpt'):
@@ -85,22 +85,22 @@ class Inference():
     def webcamSingle(self, thresh=0.2, pltJ=True, pltL=True):
         """ Run Single Pose Estimation on Webcam Stream
         Args :
-            thresh: Joint Threshold
-            pltJ: (bool) True to plot joints
-            pltL: (bool) True to plot limbs
+            thresh  : Joint Threshold
+            pltJ    : (bool) True to plot joints
+            pltL    : (bool) True to plot limbs
         """
         self.predict.hpeWebcam(thresh=thresh, plt_j=pltJ, plt_l=pltL, plt_hm=False, debug=False)
 
     def webcamMultiple(self, thresh=0.2, nms=0.5, resolution=800, pltL=True, pltJ=True, pltB=True, isolate=False):
         """ Run Multiple Pose Estimation on Webcam Stream
         Args:
-            thresh: Joint Threshold
-            nms : Non Maxima Suppression Threshold
-            resolution : Stream Resolution
-            pltJ: (bool) True to plot joints
-            pltL: (bool) True to plot limbs
-            pltB: (bool) True to plot bounding boxes
-            isolate: (bool) True to show isolated skeletons
+            thresh      : Joint Threshold
+            nms         : Non Maxima Suppression Threshold
+            resolution  : Stream Resolution
+            pltJ        : (bool) True to plot joints
+            pltL        : (bool) True to plot limbs
+            pltB        : (bool) True to plot bounding boxes
+            isolate     : (bool) True to show isolated skeletons
         """
         self.predict.mpe(j_thresh=thresh, nms_thresh=nms, plt_l=pltL, plt_j=pltJ, plt_b=pltB, img_size=resolution,
                          skeleton=isolate)
@@ -108,8 +108,8 @@ class Inference():
     def webcamPCA(self, n=5, matrix='p4frames.mat'):
         """ Run Single Pose Estimation with Error Reconstruction on Webcam Stream
         Args:
-            n : Number of dimension to keep before reconstruction
-            matrix : MATLAB eigenvector matrix to load
+            n       : Number of dimension to keep before reconstruction
+            matrix  : MATLAB eigenvector matrix to load
         """
         self.predict.reconstructACPVideo(load=matrix, n=n)
 
@@ -134,9 +134,9 @@ class Inference():
         """ Return Joint Location
         /!\ Location with respect to 256x256 image
         Args:
-            img : Input Image -shape=(256x256x3) -value= uint8 (in [0, 255])
-            mode : 'cpu' / 'gpu' Select a mode to compute joints' location
-            thresh : Joint Threshold
+            img     : Input Image -shape=(256x256x3) -value= uint8 (in [0, 255])
+            mode    : 'cpu' / 'gpu' Select a mode to compute joints' location
+            thresh  : Joint Threshold
         """
         SIZE = False
         if len(img.shape) == 3:
@@ -160,10 +160,10 @@ class Inference():
     def pltSkeleton(self, img, thresh, pltJ, pltL):
         """ Return an image with plotted joints and limbs
         Args:
-            img : Input Image -shape=(256x256x3) -value= uint8 (in [0, 255])
-            thresh: Joint Threshold
-            pltJ: (bool) True to plot joints
-            pltL: (bool) True to plot limbs
+            img     : Input Image -shape=(256x256x3) -value= uint8 (in [0, 255])
+            thresh  : Joint Threshold
+            pltJ    : (bool) True to plot joints
+            pltL    : (bool) True to plot limbs
         """
         return self.predict.pltSkeleton(img, thresh=thresh, pltJ=pltJ, pltL=pltL, tocopy=True, norm=True)
 
@@ -173,15 +173,15 @@ class Inference():
                      pltB=True, show=False):
         """ Run Multiple Pose Estimation on Video Footage
         Args:
-            source : Input Footage
-            outfile : File to Save
-            thesh : Joints Threshold
-            nms : Non Maxima Suppression Threshold
-            codec : Codec to use
-            pltJ: (bool) True to plot joints
-            pltL: (bool) True to plot limbs
-            pltB: (bool) True to plot bounding boxes
-            show: (bool) Show footage during processing
+            source      : Input Footage
+            outfile     : File to Save
+            thesh       : Joints Threshold
+            nms         : Non Maxima Suppression Threshold
+            codec       : Codec to use
+            pltJ        : (bool) True to plot joints
+            pltL        : (bool) True to plot limbs
+            pltB        : (bool) True to plot bounding boxes
+            show        : (bool) Show footage during processing
         """
         return self.predict.videoDetection(src=source, outName=outfile, codec=codec, j_thresh=thresh, nms_thresh=nms,
                                            show=show, plt_j=pltJ, plt_l=pltL, plt_b=pltB)
