@@ -256,3 +256,14 @@ class Inference():
                 break
         cv2.destroyAllWindows()
         cam.release()
+
+
+if __name__ == '__main__':
+    inf = Inference('config.cfg', 'hg_test_01')
+    params = process_config('config.cfg')
+    dataset = DataGenerator(params['joint_list'], params['img_directory_win'], params['training_txt_file'],
+                            remove_joints=params['remove_joints'])
+    img = dataset.open_img('000033016.jpg')
+    print(img)
+    print(img.shape)
+    inf.predictJoints(img)

@@ -347,7 +347,7 @@ class DataGenerator():
     def _generator(self, batch_size=16, stacks=4, set='train', stored=False, normalize=True, debug=False):
         """ Create Generator for Training
         Args:
-            batch_size	: Number of images per batch
+            batch_size	    : Number of images per batch
             stacks			: Number of stacks/module in the network
             set				: Training/Testing/Validation set # TODO: Not implemented yet
             stored			: Use stored Value # TODO: Not implemented yet
@@ -448,7 +448,7 @@ class DataGenerator():
         Args:
             batchSize 	: Number of image per batch
             stacks 	 	: Stacks in HG model
-            norm 	 	 	: (bool) True to normalize the batch
+            norm 	 	: (bool) True to normalize the batch
             sample 	 	: 'train'/'valid' Default: 'train'
         """
         return self._aux_generator(batch_size=batchSize, stacks=stacks, normalize=norm, sample_set=sample)
